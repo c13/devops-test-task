@@ -1,0 +1,10 @@
+helm create my-go-app
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm dependency update my-go-app
+docker tag devops-test-task-app antonc13/app
+docker push antonc13/app
+helm package my-go-app
+helm install my-go-app-release my-go-app
+
+kubect get po
+kubectl logs -l app.kubernetes.io/name=my-go-app --tail=100
